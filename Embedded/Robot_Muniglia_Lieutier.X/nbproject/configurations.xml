@@ -6,8 +6,10 @@
                    projectFiles="true">
       <itemPath>ChipConfig.h</itemPath>
       <itemPath>IO.h</itemPath>
-      <itemPath>timer.h</itemPath>
       <itemPath>Robot.h</itemPath>
+      <itemPath>timer.h</itemPath>
+      <itemPath>PWM.h</itemPath>
+      <itemPath>Toolbox.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -21,7 +23,8 @@
       <itemPath>IO.c</itemPath>
       <itemPath>timer.c</itemPath>
       <itemPath>Robot.c</itemPath>
-      <itemPath>ToolBox.c</itemPath>
+      <itemPath>PWM.c</itemPath>
+      <itemPath>Toolbox.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -208,6 +211,9 @@
       <ICD3PlatformTool>
         <property key="firmware.download.all" value="false"/>
       </ICD3PlatformTool>
+      <Tool>
+        <property key="firmware.download.all" value="false"/>
+      </Tool>
     </conf>
   </confs>
 </configurationDescriptor>

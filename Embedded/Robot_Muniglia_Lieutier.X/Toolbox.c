@@ -1,4 +1,5 @@
-#include "Toolbox.h"
+#include "ToolBox.h"
+
 float Abs(float value)
 {
 if (value >= 0)
@@ -41,3 +42,4 @@ float DegreeToRadian(float value)
 {
 return value * PI / 180.0;
 }
+
