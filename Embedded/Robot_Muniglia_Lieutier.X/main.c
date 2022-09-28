@@ -14,34 +14,35 @@
 #include "timer.h"
 #include "PWM.h"
 
-int main (void){
-/***************************************************************************************************/
-//Initialisation de l'oscillateur
-/****************************************************************************************************/
-InitOscillator();
+int main(void) {
 
-// Configuration des entrées sorties
-InitIO();
+    //Initialisation de l'oscillateur
+    InitOscillator();
 
-//Initialisation de timers
-InitTimer1();
-InitTimer23();
+    // Configuration des entrées sorties
+    InitIO();
 
-InitPWM();
-PWMSetSpeed(20);
+    //Initialisation des timers
+    InitTimer1();
+    InitTimer23();
 
-//LED_BLANCHE = 1;
-//LED_BLEUE = 1;
-//LED_ORANGE = 1;
+    //Initialisation Moteur
+    InitPWM();
+//    PWMSetSpeed(-20, MOTEUR_DROIT);
+//    PWMSetSpeed(-20, MOTEUR_GAUCHE);
+    PWMSpeedConsigne(15, MOTEUR_DROIT);
+    PWMSpeedConsigne(15, MOTEUR_GAUCHE);
+            
+    LED_BLANCHE = 1;
+    LED_BLEUE = 1;
+    LED_ORANGE = 1;
 
-
-
-/****************************************************************************************************/
-// Boucle Principale
-/****************************************************************************************************/
-while(1){
-//    LED_BLANCHE = !LED_BLANCHE;
-//    LED_ORANGE = !LED_ORANGE;
-//    LED_BLEUE = !LED_BLEUE;
-} // fin main
+    /****************************************************************************************************/
+    // Boucle Principale
+    /****************************************************************************************************/
+    while (1) {
+        //    LED_BLANCHE = !LED_BLANCHE;
+        //    LED_ORANGE = !LED_ORANGE;
+        //    LED_BLEUE = !LED_BLEUE;
+    } // fin main
 }
