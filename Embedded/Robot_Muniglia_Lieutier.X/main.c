@@ -44,10 +44,30 @@ int main(void) {
         if (ADCIsConversionFinished() == 1){
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult ();
-            unsigned int * ADCValue0 = result [0];
-            unsigned int * ADCValue1 = result [1];
-            unsigned int * ADCValue2 = result [2];
+            unsigned int ADCValue0 = result [0];
+            unsigned int ADCValue1 = result [1];
+            unsigned int ADCValue2 = result [2];
             
+            if (ADCValue0 >= 310){
+                LED_ORANGE = 1;
+            }
+            else{
+                LED_ORANGE = 0;
+            }
+            
+            if (ADCValue1 >= 310){
+                LED_BLEUE = 1;
+            }
+            else{
+                LED_BLEUE = 0;
+            }
+            
+            if (ADCValue2 >= 310){
+                LED_BLANCHE = 1;
+            }
+            else{
+                LED_BLANCHE = 0;
+            }
         }
     } // fin main
 }
