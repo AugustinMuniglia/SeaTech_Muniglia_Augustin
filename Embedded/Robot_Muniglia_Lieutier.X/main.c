@@ -41,9 +41,13 @@ int main(void) {
     // Boucle Principale
     /****************************************************************************************************/
     while (1) {
-        if (ADCIsConversionFinished()){
+        if (ADCIsConversionFinished() == 1){
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult ();
+            unsigned int * ADCValue0 = result [0];
+            unsigned int * ADCValue1 = result [1];
+            unsigned int * ADCValue2 = result [2];
+            
         }
     } // fin main
 }
