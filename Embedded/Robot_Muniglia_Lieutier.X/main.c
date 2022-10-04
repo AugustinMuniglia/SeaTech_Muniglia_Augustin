@@ -30,8 +30,6 @@ int main(void) {
     InitPWM();
 //    PWMSetSpeed(-20, MOTEUR_DROIT);
 //    PWMSetSpeed(-20, MOTEUR_GAUCHE);
-    PWMSpeedConsigne(15, MOTEUR_DROIT);
-    PWMSpeedConsigne(15, MOTEUR_GAUCHE);
             
     LED_BLANCHE = 1;
     LED_BLEUE = 1;
