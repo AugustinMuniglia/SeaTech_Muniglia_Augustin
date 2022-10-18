@@ -11,6 +11,7 @@
       <itemPath>PWM.h</itemPath>
       <itemPath>Toolbox.h</itemPath>
       <itemPath>ADC.h</itemPath>
+      <itemPath>main.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -45,7 +46,7 @@
         <targetDevice>dsPIC33EP512GM306</targetDevice>
         <targetHeader></targetHeader>
         <targetPluginBoard></targetPluginBoard>
-        <platformTool>ICD3PlatformTool</platformTool>
+        <platformTool>ICD4Tool</platformTool>
         <languageToolchain>XC16</languageToolchain>
         <languageToolchainVersion>1.70</languageToolchainVersion>
         <platform>3</platform>
