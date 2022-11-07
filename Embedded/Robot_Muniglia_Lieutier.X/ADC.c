@@ -35,11 +35,9 @@ AD1CON1bits.SSRC = 0b111; // 111 = Internal counter ends sampling and starts con
 AD1CON2bits.VCFG = 0b000; // 000 : Voltage Reference = AVDD AVss
 AD1CON2bits.CSCNA = 1; // 1 : Enable Channel Scanning
 AD1CON2bits.CHPS = 0b00; // Converts CH0 only
-AD1CON2bits.SMPI = 2; // 2+1 conversions successives avant interrupt
+AD1CON2bits.SMPI = 4; // 2+1 conversions successives avant interrupt
 AD1CON2bits.ALTS = 0;
 AD1CON2bits.BUFM = 0;
-
- 
 
 /************************************************************/
 //AD1CON3
@@ -52,6 +50,8 @@ AD1CON3bits.SAMC = 15; // Auto Sample Time
 //AD1CON4
 /************************************************************/
 AD1CON4bits.ADDMAEN = 0; // DMA is not used
+
+
 
 /************************************************************/
 //Configuration des ports
