@@ -7,6 +7,28 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="Emission" Header="Emission" Margin="0" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="1" Grid.Row="1">
+            <TextBox x:Name="TextBoxEmission" Margin="0" TextWrapping="Wrap" BorderBrush="{x:Null}" Foreground="Black" Background="{x:Null}" AcceptsReturn="True" KeyUp="TextBoxEmission_KeyUp"/>
+        </GroupBox>
+        <GroupBox x:Name="Reception" Header="Réception" Margin="0" Background="#FFDDDDDD" BorderBrush="Black" Grid.Column="3" Grid.Row="1">
+            <TextBox x:Name="TextBoxReception" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True"/>
+        </GroupBox>
+        <Button x:Name="buttonEnvoyer" Content="Envoyer" Grid.Column="1" Margin="0" Grid.Row="3" Width="100" HorizontalAlignment="Center" Click="buttonEnvoyer_Click"/>
+        <Button Content="Clear" Grid.Column="3" Margin="0" Grid.Row="3" Width="100" HorizontalAlignment="Center" Click="buttonClear_Click"/>
+
     </Grid>
 </Window>
