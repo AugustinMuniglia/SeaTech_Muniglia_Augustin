@@ -16,6 +16,8 @@
 #include "ADC.h"
 #include "Robot.h"
 #include "main.h"
+#include "UART.h"
+
 
 unsigned char sensorState;
 
@@ -37,6 +39,9 @@ int main(void) {
     
     //Initiation ADC
     InitADC1();
+    
+    //Initiation UART
+    InitUART();
             
     LED_BLANCHE = 1;
     LED_BLEUE = 1;

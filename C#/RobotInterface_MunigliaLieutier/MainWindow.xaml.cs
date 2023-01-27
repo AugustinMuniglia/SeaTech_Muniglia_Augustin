@@ -44,17 +44,19 @@ namespace RobotInterface_MunigliaLieutier
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            if (robot.receivedText != "")
+            while (robot.byteListReceived.Count > 0)
             {
-                TextBoxReception.Text += robot.receivedText;
-                robot.receivedText = "";
+                TextBoxReception.Text += "0x" + robot.byteListReceived.Dequeue().ToString("X2") + " ";
             }
         }
 
 
         private void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            for (int i = 0; i < e.Data.Length; i++)
+            {
+                robot.byteListReceived.Enqueue(e.Data[i]);
+            }
         }
 
 
@@ -82,10 +84,8 @@ namespace RobotInterface_MunigliaLieutier
 
         private void SendMessage()
         {
-            //TextBoxReception.Text += "Recu : " + TextBoxEmission.Text;
             serialPort1.WriteLine(TextBoxEmission.Text);
             TextBoxEmission.Text = null;
-            //TextBoxReception.Text = robot.receivedText;
         }
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
@@ -93,6 +93,14 @@ namespace RobotInterface_MunigliaLieutier
             TextBoxReception.Text = null;
         }
 
-
+        private void buttonTest_Click(object sender, RoutedEventArgs e)
+        {
+            byte[] byteList = new byte[20];
+            for (int i = 0; i < 20; i++)
+            {
+                byteList[i] = (byte)(2 * i);
+            }
+            serialPort1.Write(byteList, 0, 20);
+        }
     }
 }

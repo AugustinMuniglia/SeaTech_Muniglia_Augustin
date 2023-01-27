@@ -17,7 +17,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="50"/>
             <ColumnDefinition/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
@@ -28,7 +28,9 @@
             <TextBox x:Name="TextBoxReception" Margin="0" TextWrapping="Wrap" AcceptsReturn="True" Background="{x:Null}" BorderBrush="{x:Null}" IsReadOnly="True"/>
         </GroupBox>
         <Button x:Name="buttonEnvoyer" Content="Envoyer" Grid.Column="1" Margin="0" Grid.Row="3" Width="100" HorizontalAlignment="Center" Click="buttonEnvoyer_Click"/>
-        <Button Content="Clear" Grid.Column="3" Margin="0" Grid.Row="3" Width="100" HorizontalAlignment="Center" Click="buttonClear_Click"/>
+        <Button x:Name="buttonClear" Content="Clear" Grid.Column="3" Margin="0" Grid.Row="3" Width="100" HorizontalAlignment="Center" Click="buttonClear_Click"/>
+        <Button x:Name="buttonTest" Content="Test" Grid.Column="2" Margin="0" Grid.Row="3" Width="50" HorizontalAlignment="Center" Click="buttonTest_Click"/>
+
 
     </Grid>
 </Window>
