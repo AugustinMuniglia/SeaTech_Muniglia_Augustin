@@ -21,16 +21,18 @@ namespace RobotInterface_MunigliaLieutier
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
 
+    
+
     public partial class MainWindow : Window
     {
         ReliableSerialPort serialPort1;
         DispatcherTimer timerAffichage;
-        string receivedText = "" ;
+        Robot robot = new Robot();
 
         public MainWindow()
         {
             InitializeComponent();
-            serialPort1 = new ReliableSerialPort("COM4", 115200, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
+            serialPort1 = new ReliableSerialPort("COM6", 115200, System.IO.Ports.Parity.None, 8, System.IO.Ports.StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
 
@@ -42,14 +44,17 @@ namespace RobotInterface_MunigliaLieutier
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            
+            if (robot.receivedText != "")
+            {
+                TextBoxReception.Text += robot.receivedText;
+                robot.receivedText = "";
+            }
         }
 
 
         private void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            TextBoxReception.Text += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
-            
+            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
         }
 
 
@@ -77,10 +82,10 @@ namespace RobotInterface_MunigliaLieutier
 
         private void SendMessage()
         {
-            TextBoxReception.Text += "Recu : " + TextBoxEmission.Text;
+            //TextBoxReception.Text += "Recu : " + TextBoxEmission.Text;
             serialPort1.WriteLine(TextBoxEmission.Text);
             TextBoxEmission.Text = null;
-            TextBoxReception.Text = receivedText;
+            //TextBoxReception.Text = robot.receivedText;
         }
 
         private void buttonClear_Click(object sender, RoutedEventArgs e)
