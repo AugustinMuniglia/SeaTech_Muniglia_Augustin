@@ -102,5 +102,18 @@ namespace RobotInterface_MunigliaLieutier
             }
             serialPort1.Write(byteList, 0, 20);
         }
+
+        byte CalculateChecksum(int msgFunction,int msgPayloadLength, byte[] msgPayload)
+        {
+            byte Checksum;
+            byte Frame = 0xFE;
+            Frame += (byte)(msgFunction >> 8);
+            Frame += (byte)(msgFunction);
+            Frame += (byte)(msgPayloadLength >> 8);
+            Frame += (byte)(msgPayloadLength);
+            Frame += msgPayload;
+
+            return Checksum;
+        }
     }
 }
