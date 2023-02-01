@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ExtendedSerialPort;
-using System.Windows.Threading; 
+using System.Windows.Threading;
 
 namespace RobotInterface_MunigliaLieutier
 {
@@ -21,7 +21,7 @@ namespace RobotInterface_MunigliaLieutier
     /// Logique d'interaction pour MainWindow.xaml
     /// </summary>
 
-    
+
 
     public partial class MainWindow : Window
     {
@@ -76,7 +76,7 @@ namespace RobotInterface_MunigliaLieutier
 
         private void TextBoxEmission_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
+            if (e.Key == Key.Enter)
             {
                 SendMessage();
             }

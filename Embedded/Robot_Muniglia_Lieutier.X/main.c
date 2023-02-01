@@ -18,6 +18,8 @@
 #include "Robot.h"
 #include "main.h"
 #include "UART.h"
+#include "CB_TX1.h"
+#include "CB_RX1.h"
 
 
 unsigned char sensorState;
@@ -52,6 +54,14 @@ int main(void) {
     // Boucle Principale
     /****************************************************************************************************/
     while (1) {
+
+        int i;
+        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
+            unsigned char c = CB_RX1_Get();
+            SendMessage(&c, 1);
+        }
+        __delay32(1000);
+        
         if (ADCIsConversionFinished() == 1 ){
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();
@@ -105,11 +115,9 @@ int main(void) {
             else{
                 LED_ORANGE = 0;
             }
+            
         }
-        
-        SendMessageDirect((unsigned char*) "Bonjour", 7);
-        __delay32(40000000);
-        
+       
     } // fin main
 }
 
