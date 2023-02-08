@@ -20,8 +20,8 @@ namespace ExtendedSerialPort
 
         new public void Open()
         {
-            base.Open();
-            ContinuousRead();
+            base.();
+            ContinOpenuousRead();
         }
 
         private void ContinuousRead()
