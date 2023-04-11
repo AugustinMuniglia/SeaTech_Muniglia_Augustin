@@ -86,7 +86,8 @@ namespace RobotInterface_MunigliaLieutier
 
         private void SendMessage()
         {
-            serialPort1.WriteLine(TextBoxEmission.Text);
+            byte[] tests = Encoding.ASCII.GetBytes(TextBoxEmission.Text);
+            UartEncodeAndSendMessage(0x0080, tests.Length, tests);
             TextBoxEmission.Text = null;
         }
 
@@ -198,15 +199,55 @@ namespace RobotInterface_MunigliaLieutier
                     if (CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload) == c)
                     {
                         //Success, on a un message valide
-                        TextBoxReception.Text += "OK" ;
+                        TextBoxReception.Text += "Ok";
                     }
                     rcvState = StateReception.Waiting;
                     break;
                 default:
                     rcvState = StateReception.Waiting;
                     break;
-}
-}
+            }
+        }
 
+        public enum TypeMessage
+        {
+            0x0020,
+            0x0030,
+            0x0040,
+            0x0080
+        }
+
+        void UseMessage()
+        {
+            switch (msgDecodedFunction)
+            {
+                case TypeMessage.0x0080:
+                    // Texte
+                    string str = Encoding.Default.GetString(msgDecodedPayload);
+                    TextBoxReception.Text = str;
+
+                case TypeMessage.0x0020:
+                    // Réglage LED
+                    if (msgDecodedPayload[0] == 1)
+                    {
+                        LED_Orange.IsChecked = Convert.ToBoolean(msgDecodedPayload[1]);
+                    }
+                    if (msgDecodedPayload[0] == 2)
+                    {
+                        LED_Bleu.IsChecked = Convert.ToBoolean(msgDecodedPayload[1]);
+                    }
+                    if (msgDecodedPayload[0] == 3)
+                    {
+                        LED_Blanche.IsChecked = Convert.ToBoolean(msgDecodedPayload[1]);
+                    }
+
+                case TypeMessage.0x0030:
+                    //Télémètres
+                    Telemetres.Text = "IR Ext Gauche :" + msgDecodedPayload[0] + "\nIR Gauche : " + msgDecodedPayload[1] + "\nIR Centre : " + msgDecodedPayload[2] + "\nIR Droit : " + msgDecodedPayload[3] + "\nIR Ext Droit: " + msgDecodedPayload[4];
+
+                case TypeMessage.0x0040:
+                    Moteurs.Text = "Vitesse  Gauche: " + msgDecodedPayload[0] + "Vitesse Droit : " + msgDecodedPayload[1];
+            }
+        }
     }
 }
