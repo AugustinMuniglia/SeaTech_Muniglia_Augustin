@@ -18,11 +18,6 @@ namespace ExtendedSerialPort
             ReceivedBytesThreshold = 1024;
         }
 
-        new public void Open()
-        {
-            base.();
-            ContinOpenuousRead();
-        }
 
         private void ContinuousRead()
         {
