@@ -248,7 +248,7 @@ namespace RobotInterface_MunigliaLieutier
                     Telemetres.Text = "IR Ext Gauche :" + this.msgPayload[0] + "\nIR Gauche : " + this.msgPayload[1] + "\nIR Centre : " + this.msgPayload[2] + "\nIR Droit : " + this.msgPayload[3] + "\nIR Ext Droit: " + this.msgPayload[4];
                     break;
 
-                case TypeMessage.:
+                case TypeMessage.VitesseMoteur:
                     Moteurs.Text = "Vitesse  Gauche: " + this.msgPayload[0] + "\nVitesse Droit : " + this.msgPayload[1];
                     break;
             }
