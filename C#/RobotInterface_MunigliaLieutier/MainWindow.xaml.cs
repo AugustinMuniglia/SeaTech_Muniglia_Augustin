@@ -153,10 +153,10 @@ namespace RobotInterface_MunigliaLieutier
         }
 
         StateReception rcvState = StateReception.Waiting;
-        int msgFunction = 0;
-        int msgPayloadLength = 0;
-        byte[] msgPayload;
-        int msgPayloadIndex = 0;
+        int msgDecodeFunction = 0;
+        int msgDecodePayloadLength = 0;
+        byte[] msgDecodePayload;
+        int msgDecodePayloadIndex = 0;
 
         private void DecodeMessage(byte c)
         {
@@ -167,36 +167,36 @@ namespace RobotInterface_MunigliaLieutier
                         rcvState = StateReception.FunctionMSB;
                     break;
                 case StateReception.FunctionMSB:
-                    msgFunction = c << 8;
+                    msgDecodeFunction = c << 8;
                     rcvState = StateReception.FunctionLSB;
                     break;
                 case StateReception.FunctionLSB:
-                    msgFunction += c << 0;
+                    msgDecodeFunction += c << 0;
                     rcvState = StateReception.PayloadLengthMSB;
                     break;
                 case StateReception.PayloadLengthMSB:
-                    msgPayloadLength = c << 8;
+                    msgDecodePayloadLength = c << 8;
                     rcvState = StateReception.PayloadLengthLSB;
                     break;
                 case StateReception.PayloadLengthLSB:
-                    msgPayloadLength += c << 0;
-                    msgPayload = new byte[msgPayloadLength]; 
-                    msgPayloadIndex = 0;
+                    msgDecodePayloadLength += c << 0;
+                    msgDecodePayload = new byte[msgDecodePayloadLength]; 
+                    msgDecodePayloadIndex = 0;
                     rcvState = StateReception.Payload;
-                    if (msgPayloadLength <= 0 && msgPayloadLength >= 50000)
+                    if (msgDecodePayloadLength <= 0 && msgDecodePayloadLength >= 50000)
                     {
                         rcvState = StateReception.Waiting;
                     }
                     break;
                 case StateReception.Payload:
-                    msgPayload[msgPayloadIndex++] = c;
-                    if (msgPayloadIndex >= msgPayloadLength)
+                    msgDecodePayload[msgDecodePayloadIndex++] = c;
+                    if (msgDecodePayloadIndex >= msgDecodePayloadLength)
                     {
                         rcvState = StateReception.CheckSum;
                     }
                     break;
                 case StateReception.CheckSum:
-                    if (CalculateChecksum(msgFunction, msgPayloadLength, msgPayload) == c)
+                    if (CalculateChecksum(msgDecodeFunction, msgDecodePayloadLength, msgDecodePayload) == c)
                     {
                         //Success, on a un message valide
                         TextBoxReception.Text += "Ok";
@@ -223,33 +223,33 @@ namespace RobotInterface_MunigliaLieutier
             {
                 case TypeMessage.Texte:
                     // Texte
-                    string str = Encoding.Default.GetString(this.msgPayload);
+                    string str = Encoding.Default.GetString(this.msgDecodePayload);
                     TextBoxReception.Text = str;
                     break;
 
                 case TypeMessage.Leds:
                     // Réglage LED
-                    if (this.msgPayload[0] == 1)
+                    if (this.msgDecodePayload[0] == 1)
                     {
-                        LED_Orange.IsChecked = Convert.ToBoolean(this.msgPayload[1]);
+                        LED_Orange.IsChecked = Convert.ToBoolean(this.msgDecodePayload[1]);
                     }
-                    if (this.msgPayload[0] == 2)
+                    if (this.msgDecodePayload[0] == 2)
                     {
-                        LED_Bleu.IsChecked = Convert.ToBoolean(this.msgPayload[1]);
+                        LED_Bleu.IsChecked = Convert.ToBoolean(this.msgDecodePayload[1]);
                     }
-                    if (this.msgPayload[0] == 3)
+                    if (this.msgDecodePayload[0] == 3)
                     {
-                        LED_Blanche.IsChecked = Convert.ToBoolean(this.msgPayload[1]);
+                        LED_Blanche.IsChecked = Convert.ToBoolean(this.msgDecodePayload[1]);
                     }
                     break;
 
                 case TypeMessage.TelemetresIR:
                     //Télémètres
-                    Telemetres.Text = "IR Ext Gauche :" + this.msgPayload[0] + "\nIR Gauche : " + this.msgPayload[1] + "\nIR Centre : " + this.msgPayload[2] + "\nIR Droit : " + this.msgPayload[3] + "\nIR Ext Droit: " + this.msgPayload[4];
+                    Telemetres.Text = "IR Ext Gauche :" + this.msgDecodePayload[0] + "\nIR Gauche : " + this.msgDecodePayload[1] + "\nIR Centre : " + this.msgDecodePayload[2] + "\nIR Droit : " + this.msgDecodePayload[3] + "\nIR Ext Droit: " + this.msgDecodePayload[4];
                     break;
 
                 case TypeMessage.VitesseMoteur:
-                    Moteurs.Text = "Vitesse  Gauche: " + this.msgPayload[0] + "\nVitesse Droit : " + this.msgPayload[1];
+                    Moteurs.Text = "Vitesse  Gauche: " + this.msgDecodePayload[0] + "\nVitesse Droit : " + this.msgDecodePayload[1];
                     break;
             }
         }

@@ -65,6 +65,9 @@ int main(void) {
         if (ADCIsConversionFinished() == 1 ){
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();
+            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+            UartEncodeAndSendMessage(0x0080, 7, payload);
+            __delay32(40000000);
             
             float volts = ((float)result[3]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtrGauche = 34 / volts - 5;
