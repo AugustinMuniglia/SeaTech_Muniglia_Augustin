@@ -342,13 +342,14 @@ namespace RobotInterface
                     Moteurs.Content += "Vitesse Droit : " + msgPayload[1]  + "%\n";
                     break;
 
+                case TypeMessage.Text:
+                    string str = Encoding.Default.GetString(msgPayload);
+                    textBoxReception.Text += "Message : " + str + "\n";
+                    break;
+
                 case TypeMessage.RobotState:
                     int instant = (((int)msgPayload[1]) << 24) + (((int)msgPayload[2]) << 16) + (((int)msgPayload[3]) << 8) + ((int)msgPayload[4]);
                     textBoxReception.Text += "\nRobot State : " + ((StateRobot)(msgPayload[0])).ToString() + " - " + instant.ToString() + " ms";
-                    break;
-                case TypeMessage.Text:
-                    string str = Encoding.Default.GetString(msgPayload);
-                    textBoxReception.Text += str;
                     break;
             }
         }

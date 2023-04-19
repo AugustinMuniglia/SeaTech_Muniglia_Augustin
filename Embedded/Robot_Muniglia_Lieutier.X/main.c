@@ -64,9 +64,9 @@ int main(void) {
         if (ADCIsConversionFinished() == 1 ){
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();
-            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
-            UartEncodeAndSendMessage(0x0080, 7, payload);
-            __delay32(400000);
+//            unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
+//            UartEncodeAndSendMessage(0x0080, 7, payload);
+//            __delay32(40000000);
             
             float volts = ((float)result[3]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtrGauche = 34 / volts - 5;
@@ -82,6 +82,17 @@ int main(void) {
             
             volts = ((float)result[0]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtrDroit = 34 / volts - 5; 
+            
+            unsigned char payloadTelemetre[] = {robotState.distanceTelemetreGauche, robotState.distanceTelemetreCentre, robotState.distanceTelemetreDroit};
+            UartEncodeAndSendMessage(0x0030, 3, payloadTelemetre);
+//            unsigned char payloadState[] = {stateRobot,timestamp[0],timestamp[1],timestamp[2],timestamp[3]};
+//            UartEncodeAndSendMessage(0x0050, 5, payloadState);
+            unsigned char payloadLed[] = {1, LED_BLANCHE, 2, LED_BLEUE, 3, LED_ORANGE};
+            UartEncodeAndSendMessage(0x0020, 6, payloadLed);
+            unsigned char payloadVitesse[] = {robotState.vitesseGaucheCommandeCourante,robotState.vitesseDroiteCommandeCourante};
+            UartEncodeAndSendMessage(0x0040, 2, payloadVitesse);
+
+
             
             float d = 40;
             
