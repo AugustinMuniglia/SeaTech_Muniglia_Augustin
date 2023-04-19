@@ -36,7 +36,7 @@ void UartEncodeAndSendMessage(int msgFunction, int msgPayloadLength, unsigned ch
     }
     Frame[pos++] = UartCalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
     
-    SendMessageDirect(Frame, msgPayloadLength);
+    SendMessage(Frame, pos);
 }
 
 int msgDecodedFunction = 0;

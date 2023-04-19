@@ -60,14 +60,13 @@ int main(void) {
             unsigned char c = CB_RX1_Get();
             SendMessage(&c, 1);
         }
-        __delay32(1000);
         
         if (ADCIsConversionFinished() == 1 ){
             ADCClearConversionFinishedFlag();
             unsigned int * result = ADCGetResult();
             unsigned char payload[] = {'B', 'o', 'n', 'j', 'o', 'u', 'r'};
             UartEncodeAndSendMessage(0x0080, 7, payload);
-            __delay32(40000000);
+            __delay32(400000);
             
             float volts = ((float)result[3]) * 3.3 / 4096 * 3.2;
             robotState.distanceTelemetreExtrGauche = 34 / volts - 5;

@@ -1,0 +1,36 @@
+﻿<Window x:Class="RobotInterface.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RobotInterface"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="500" Width="808">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox Header="Emission" Grid.Column="0" Grid.Row="0" Margin="5">
+            <GroupBox x:Name="Moteurs" Header="Moteurs" HorizontalAlignment="Left" Height="100" Margin="268,242,-26,0" VerticalAlignment="Top" Width="136"/>
+        </GroupBox>
+        <GroupBox Header="Reception" Grid.Column="1" Grid.Row="0" Margin="22,5,5,5">
+            <TextBox x:Name="textBoxReception" TextWrapping="Wrap" AcceptsReturn="True" IsReadOnly="True" Margin="0,0,0,181"/>
+        </GroupBox>
+        <Button x:Name="buttonEnvoyer" Content="Envoyer" Grid.Column="0" HorizontalAlignment="Center" Grid.Row="1" Width="100" Height="25" Click="buttonEnvoyer_Click"/>
+        <Button x:Name="buttonClear" Content="Clear" Grid.Column="1" HorizontalAlignment="Center" Grid.Row="1" Width="100" Height="25" Click="buttonClear_Click"/>
+        <Button x:Name="Test" Content="TEST" Grid.Column="1" HorizontalAlignment="Left" Margin="22,13,0,0" Grid.Row="1" VerticalAlignment="Top" Width="100" Height="25" Click="Test_Click"/>
+        <CheckBox x:Name="LED_1" Content="LED1
+                  " HorizontalAlignment="Left" VerticalAlignment="Top" Margin="33,302,0,0" RenderTransformOrigin="0.958,1"/>
+        <GroupBox x:Name="Leds" Header="Leds" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="100" Margin="27,256,0,0" RenderTransformOrigin="-0.17,0.51">
+            <CheckBox x:Name="LED_3" Content="LED3" HorizontalAlignment="Left" Height="18" Margin="4,50,0,0" VerticalAlignment="Top" Width="76"/>
+        </GroupBox>
+        <CheckBox x:Name="LED_2" Content="LED2" HorizontalAlignment="Left" VerticalAlignment="Top" RenderTransformOrigin="1.056,2.733" Margin="33,280,0,0"/>
+        <GroupBox x:Name="Télémètres_IR" Header="Télémètres IR" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="143" Margin="136,260,0,0"/>
+        <TextBox x:Name="textBoxEmission" HorizontalAlignment="Left" Height="220" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="368" Margin="21,24,0,0"/>
+    </Grid>
+</Window>
