@@ -352,6 +352,11 @@ namespace RobotInterface
                     break;
             }
         }
+
+        private void textBoxEmission_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 
     public enum StateRobot
